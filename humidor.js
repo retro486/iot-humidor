@@ -25,7 +25,7 @@ var check = function() {
           var data = JSON.parse(body);
           
           if(data.humidity < config.humidityThreshold) {
-            console.log('Humidity below threshold (' + config.humidityThreshold + '): ' + data.humidity);
+            console.log(Date(), ':Humidity below threshold (' + config.humidityThreshold + '): ' + data.humidity);
             
             var makerUrl = 'https://maker.ifttt.com/trigger/' + config.makerEvent + '/with/key/' + config.makerKey;
             
@@ -38,9 +38,9 @@ var check = function() {
               }
             }, function(mError, mResp, mBody) {
               if(mError) {
-                console.error('Unable to post to Maker channel:\n', mError);
+                console.error(Date(), ':Unable to post to Maker channel:\n', mError);
               } else if(mResp.statusCode !== 200) {
-                console.error('Unable to post to Maker channel:\n', mResp.statusCode, mBody);
+                console.error(Date(), ':Unable to post to Maker channel:\n', mResp.statusCode, mBody);
               } else {
                 // Set alertTimeout to non-falsey value to avoid getting spammed.
                 alertTimeout = setTimeout(function() {
@@ -49,17 +49,17 @@ var check = function() {
               }
             });
           } else {
-            console.log('Humidity at or above threshold (' + config.humidityThreshold + '): ' + data.humidity);
+            console.log(Date(), ':Humidity at or above threshold (' + config.humidityThreshold + '): ' + data.humidity);
           }
         } catch(e) {
-          console.error('Unable to parse JSON response:', e.trace);
+          console.error(Date(), ':Unable to parse JSON response:', e.trace);
         }
       } else {
         if(error) {
           // Will keep trying even after failure. TODO make this smart and only retry when it makes sense (i.e., node offline)
           console.error(error);
         } else {
-          console.error('Non-OK response: ', response.statusCode, '\n', body);
+          console.error(Date(), ':Non-OK response: ', response.statusCode, '\n', body);
         }
       }
     });
