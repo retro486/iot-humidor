@@ -1,7 +1,7 @@
 {
   "name": "humidor-nodejs",
   "version": "1.0.0",
-  "description": "Connects via WebSocket to a preconfigured Wio server and checks the humidity of a preconfigured Wio board/module and passes the value along to a preconfigured IFTTT Maker channel.",
+  "description": "Connects to a preconfigured Wio server and checks the humidity of a preconfigured Wio board/module at a preconfigured interval and passes the value along to a preconfigured IFTTT Maker channel.",
   "main": "humidor.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,6 +9,6 @@
   "author": "Russ Bernhardt <russell.bernhardt@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "ws": "^1.1.0"
+    "request": "^2.72.0"
   }
 }
